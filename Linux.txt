@@ -1,39 +1,39 @@
-clear				->	clear terminal 
-ctrl+alt+t			->	open terminal
+clear			->	clear terminal 
+ctrl+alt+t		->	open terminal
 ctrl+shift+t		->	open a new terminal tab
-ctrl+u 				->	escape line's command and refresh the line from the begining
+ctrl+u 			->	escape line's command and refresh the line from the begining
 touch file.format	->	create a new file
 > file.format		->	create a new file
 nano file.format	->	create/open and edit new file
 cat file.format		->	open and view document file
 cat> file.format	->	create and edit new file
 xdg-open fileName	->	open a file using its default app
-pwd					->	print working directory
+pwd			->	print working directory
 cd dir1/dir2/etc	->	change directory
-ls					->	list and view the list of files within directory
-mkdir dir			->	make directory
+ls			->	list and view the list of files within directory
+mkdir dir		->	make directory
 sudo apt install app	->	install a third party app
 mv dir1/fil1 dir2/fil2	->	move file1 from dir1 to dir2 under the name file2
 cp source destination	->	copy file from source to destination
-rm file					->	remove file
-rm -r directory			->	(-r, -R, --recursive): remove directories and their contents recursively
-echo text				->	print text
-export					->	print all environment variables
+rm file			->	remove file
+rm -r directory		->	(-r, -R, --recursive): remove directories and their contents recursively
+echo text		->	print text
+export			->	print all environment variables
 
 [arguments: --help	->	view help for any command
  application &		->	the ampersand symbol releases the terminal's lockage on the opened application
- ls -a				->	show both hidden and visible files
- ls -l				->	show in list format
+ ls -a			->	show both hidden and visible files
+ ls -l			->	show in list format
  mkdir -p dir1/dir2	->	make nested directories
- cd ..				->	backspace in directories
+ cd ..			->	backspace in directories
  export varName="value"	->	set the value for an environment variable or define one
  export | grep varName	->	fetch a specific environment variable
 
 Premissions in Ubuntu:
--,---,---,---				->	file type(d for directory and - for file and l for link) 
+-,---,---,---		->	file type(d for directory and - for file and l for link) 
 				owner's, group's and others' premissions
 				r for read, w for write and x for execute
-chmode userType+rwx file	->	change mode (premissions) of a user (+ for giving and - for taking the premission)
+chmode userType+rwx file->	change mode (premissions) of a user (+ for giving and - for taking the premission)
 				skip the userType to change mode for owner and thus, all other users.
-Bash script					->	linux programming language
+Bash script		->	linux programming language
 				specify the language of any script like:	#!/bin/bash]
