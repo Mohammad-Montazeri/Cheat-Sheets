@@ -1,0 +1,121 @@
+ctrl+k ctrl+s -> keybindings settings
+ctrl+d -> duplicate selection
+ctrl+alt+l -> reformat code
+f1 or ctrl+shift+p -> command palette
+alt+arrows -> move a line upward or downward.
+ctrl+s -> save
+ctrl+shift+s -> save all open files
+ctrl+shift+R -> refactor (load initial codes when a html file is open in the editor)
+shift+f10 -> run current Python file in Terminal.
+ctrl+H -> replace
+shift+alt+right arrow -> expand selection
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Press and hold alt while selecting multiple instances of anything, to change them all together.
+
+Search "live preview" in command palette and choose internal or external browser for html files.
+
+Search the word 'case' in the command palette and see the vs code assistance for making words 
+upper or lower case, title case, camel case, snake case and kebab case.
+**Camel case**, **snake case**, and **kebab case** are all different ways of writing compound words as a single word.
+In **camel case**, the first word is in lowercase, and the first letter of each subsequent word is capitalized. For example, `firstName`, `lastName`, and `phoneNumber` are all written in camel case. 
+In **snake case**, all words are in lowercase, and each word is separated by an underscore (`_`). For example, `first_name`, `last_name`, and `phone_number` are all written in snake case. 
+In **kebab case**, all words are in lowercase, and each word is separated by a hyphen (`-`). For example, `first-name`, `last-name`, and `phone-number` are all written in kebab case.
+Currently, my Title case shortcut is ctrl+backspace and my to undo it, my lower case shortcut is shift+backspace.
+
+To add a cursor to all occurrences of the current selection, press Command+Shift+L (Mac) or Ctrl+Shift+L (Windows/Linux).
+To select all occurrences of the current selection, press Ctrl+Shift+L.
+To select all occurrences of the current word, press Ctrl+F2.
+
+In Terminal, Try Ctrl + C to terminate the process.
+
+You can use **speedtest-cli** tool to test your internet speed in the terminal. Here is how to install and use it:
+
+1. Install **speedtest-cli** using pip:
+python
+pip install speedtest-cli
+
+2. Run the following command to test your internet speed:
+speedtest-cli
+
+This command will test your internet speed and display the results in the terminal.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Conversation with bing chat:
+- Is there a vs code shortcut to copy a code snippet wherever I want, with just a keyboard shortcut? 
+- How do I create a custom code snippet in VS Code?
++ Snippets are defined in a JSON format and stored in a per-user (languageId).json file. For example, Markdown snippets go in a markdown.json file. 
+- I don't know json format so I want you to generate one that creates the following markdown file, whenever I insert it:
+    ```javascript
+
+    ```
+
++ Certainly! Here’s a JSON snippet that you can use to create the desired Markdown file:
+    
+    {
+    "Create Markdown File": {
+        "prefix": "mdfile",
+        "body": [
+        "```javascript",
+        "console.log('Hello, world!');",
+        "```"
+        ],
+        "description": "Creates a new Markdown file with a JavaScript code snippet."
+    }
+    }
+    
+    This JSON snippet defines a code snippet named "Create Markdown File". When you type "mdfile" and press TAB, it will generate the following code in your Markdown file:
+    console.log('Hello, world!');
+
+- Ok. now how should I add this snippet to my vs code and use its shortcut keybinding?
++ To add this JSON snippet to your VS Code, follow these steps:
+
+    1. Open VS Code and press `Shift + Command + P` (or `Ctrl + Shift + P` on Windows) to open the command palette.
+    2. Type "snippets" and select "Preferences: Configure User Snippets".
+    3. Choose the language for which you want to add the custom snippet in the input box.
+    4. Paste the JSON snippet into the file and save it.
+    5. To assign a shortcut keybinding, open the Keyboard Shortcuts editor by pressing `Ctrl + K, Ctrl + S`.
+    6. Search for your snippet by name and click on the pencil icon next to it.
+    7. Add a "when" clause to your keybinding to restrict it to specific contexts (e.g., only when editing Markdown files).
+    8. Assign a keybinding of your choice.
+    Here’s an example of how you can assign a keybinding for your Markdown file:
+
+    {
+    "key": "ctrl+alt+m",
+    "command": "editor.action.insertSnippet",
+    "when": "editorLangId == markdown",
+    "args": {
+        "name": "Create Markdown File"
+    }
+    }
+    This will assign the ctrl+alt+m keybinding to your Markdown file.
+    I hope this helps! Let me know if you have any further questions.
+
+- But it doesn't find this name.
++ I apologize for the confusion. In Visual Studio Code, the snippet name is not directly searchable in the Keyboard Shortcuts editor. Instead, you can search for the prefix of your snippet to find it.
+    so, in the 6th step, search for your snippet by typing its prefix (e.g., "mdfile") in the search bar.
+
+- Thanks. now, can I define on which coordinate of my snippet should the curser stand when I press ctrl+alt+m?
++ Yes, you can define the cursor position in your code snippet by using the `$0` placeholder. When you insert the snippet, the cursor will be placed at the position of `$0`. 
+
+    Here's an example of how you can use `$0` to define the cursor position:
+
+    {
+    "Create Markdown File": {
+        "prefix": "mdfile",
+        "body": [
+        "```javascript",
+        "console.log('Hello, world!');$0",
+        "```"
+        ],
+        "description": "Creates a new Markdown file with a JavaScript code snippet."
+    }
+    }
+
+    In this example, the cursor will be placed at the end of the code snippet after `console.log('Hello, world!');`.
+
+    I hope this helps! Let me know if you have any further questions.
+
+--------------------------------------------------------------------------------------------------------------

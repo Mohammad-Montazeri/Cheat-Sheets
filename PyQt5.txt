@@ -1,0 +1,341 @@
+primary setup:
+    import sys
+    from PyQt5.QtWidgets import *
+
+    app = QApplication([])
+    # or app = QApplication(sys.argv) -> gives access to the cmd commands
+
+    window = QWidget()
+    window.resize(500, 600)
+    window.setWindowTitle('window\'s name')
+    window.show()
+
+    sys.exit(app.exec_())   
+    # releases system's resources after the app's window is closed
+
+---------------------------------------------------------------------
+
+to add labels (texts):
+    def window():
+        app = QApplication(sys.argv)
+        widget = QWidget()
+        textlabel = QLabel(widget)
+        textlabel.setText('Hello world!')
+        textlabel.move(150, 300)
+
+        widget.setGeometry(50, 50, 300, 300) # x, y, width, height
+        widget.setWindowTitle("PyQt label")
+        widget.show()
+        sys.exit(app.exec_())
+
+    window()
+
+---------------------------------------------------------------------
+
+to add icon to the window:
+    from PyQt5.QtGui import QIcon
+    class window(QWidget):
+        def __init__(self) -> None:
+            super().__init__()
+            self.initUI()
+
+        def initUI(self):
+            self.setGeometry(50, 50, 300, 400)
+            self.setWindowTitle('PyQt icon')
+            self.setWindowIcon(QIcon("Group 1.png"))
+            self.show()
+
+    def main():
+        app = QApplication([])
+        widget = window()
+        app.exec_()
+
+    main()
+
+---------------------------------------------------------------------
+
+to add buttons:
+    def window():
+        app = QApplication(sys.argv)
+        widget = QWidget()
+
+        btn = QPushButton(widget)
+        btn.setText('Push me!')
+        btn.move(60, 40)
+        btn.clicked.connect(buttonClicked)
+
+        widget.setGeometry(50, 50, 300, 300) # x, y, width, height
+        widget.setWindowTitle("PyQt button")
+        widget.show()
+        sys.exit(app.exec_())
+
+    def buttonClicked():
+        print('clicked!')
+
+    window()
+
+---------------------------------------------------------------------
+
+to add text forms:
+    class window(QMainWindow):
+        def __init__(self):
+            super().__init__()
+
+            self.Text = QLineEdit(self)
+            self.Text.move(40, 50)
+            self.Text.resize(100, 20)
+
+            self.Label = QLabel(self)
+            self.Label.move(40, 70)
+
+            self.Text.textChanged.connect(self.onChanged)
+
+            self.setGeometry(50, 50, 300, 400)
+            self.setWindowTitle('PyQt icon')
+            self.setWindowIcon(QIcon("Group 1.png"))
+            self.show()
+
+        def onChanged(self, text):
+            self.Label.setText(text)
+            self.Label.adjustSize()
+
+    if __name__ == '__main__':
+        app = QApplication([])
+        widget = window()
+        sys.exit(app.exec_())
+
+---------------------------------------------------------------------
+
+to add checkboxes:
+    class window(QWidget):
+        def __init__(self) -> None:
+            super().__init__()
+            self.UI()
+
+        def UI(self):
+            c1 = QCheckBox('show title', self)
+            c1.stateChanged.connect(self.title)
+            c2 = QCheckBox('print title', self)
+            c2.stateChanged.connect(self.printer)
+            c2.move(10, 30)
+            self.textlabel = QLabel(self)
+            self.textlabel.move(70, 60)
+            self.textlabel.resize(70, 30) # width, height
+            self.setGeometry(90, 70, 300, 400)
+            self.setWindowTitle('PyQt checkbox')
+            self.setWindowIcon(QIcon("Group 1.png"))
+            self.show()
+
+        def title(self, state):
+            if state == Qt.Checked:
+                self.setWindowTitle('PyQt checkbox')
+            else:
+                self.setWindowTitle(' ')
+
+        def printer(self, state):
+            if state == Qt.Checked:
+                self.textlabel.setText('Hello world!')
+            else:
+                self.textlabel.setText('Nooooo!')           
+                        
+
+    def main():
+        app = QApplication([])
+        widget = window()
+        app.exec_()
+
+    main()
+
+---------------------------------------------------------------------
+
+to use grid layout:
+    def window():
+        app = QApplication(sys.argv)
+        win = QWidget()
+        grid = QGridLayout()
+
+        for i in range(6):
+            for j in range(4):
+                grid.addWidget(QPushButton(str(i)+str(j)), i, j)
+
+        win.setLayout(grid)            
+        win.setGeometry(50, 50, 300, 300) # x, y, width, height
+        win.setWindowTitle("PyQt button")
+        win.show()
+        sys.exit(app.exec_())
+
+    window()
+
+---------------------------------------------------------------------
+
+to add images:
+    class window(QWidget):
+        def __init__(self) -> None:
+            super().__init__()
+
+            self.image = QPixmap('Group 1.png')
+            self.label = QLabel()
+            self.label.setPixmap(self.image)
+
+            self.grid = QGridLayout()
+            self.grid.addWidget(self.label, 0, 0)
+            self.setLayout(self.grid)
+
+            self.setGeometry(0, 0, 900, 400)
+            self.show()
+
+    app = QApplication([])
+    widget = window()
+    sys.exit(app.exec_())
+
+---------------------------------------------------------------------
+
+to add list box:
+    class window(QWidget):
+        def __init__(self) -> None:
+            super().__init__()
+
+            combo = QComboBox(self)
+            combo.addItem('1')
+            combo.addItem('2')
+            combo.addItem('3')
+            combo.addItem('4')
+            # or: combo.addItems(['11', '22', '33'])
+            combo.move(50, 50)
+
+            self.label = QLabel(self)
+            self.label.move(50, 20)
+
+            combo.activated[str].connect(self.onChange)
+
+            self.setGeometry(30, 100, 300, 200)
+            self.show()
+
+        def onChange(self, text):
+            self.label.setText(text)
+            self.label.adjustSize()
+            print(text)
+
+    app = QApplication([])
+    widget = window()
+    sys.exit(app.exec_())
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+Episodes:
+12: slider
+13: box layout
+14: progress bar and QTimer
+15: radio button
+16: tabs
+17: item list
+18: circular slider (dialer)
+19: message box
+20: tool tips (help) [html]
+21: text completter
+22: menu bar
+23: introduction to PyQt designer
+24: Qt designer
+25: read .ui file with .py code
+26: font settings
+27: color settings [css]
+28: time settings
+29: input dialog
+30: group box
+31: frameless window
+32: opacity settings
+33: calendar and mouse
+34: converting .ui into .py 
+35: time display
+36: keyboard shortcuts
+37: toolbox
+38: animation
+39: working with .py code, converted from the .ui
+40: calculator example
+41: QML language
+42: table widget
+43: scroll bar
+44: dock widget
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+Example:
+to create interferential or nested layouts:
+
+write a PyQt5 code to put a vertical layout inside a horizontal layout which is in the center of the window
+
+```
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout, QLabel
+
+class Window(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("My App") # Set the window title
+        self.resize(300, 200) # Set the window size
+        self.h_layout = QHBoxLayout() # Create a horizontal layout
+        self.v_layout1 = QVBoxLayout() # Create the first vertical layout
+        self.v_layout2 = QVBoxLayout() # Create the second vertical layout
+        self.label1 = QLabel("Label 1") # Create the first label
+        self.label2 = QLabel("Label 2") # Create the second label
+        self.label3 = QLabel("Label 3") # Create the third label
+        self.label4 = QLabel("Label 4") # Create the fourth label
+        self.v_layout1.addWidget(self.label1) # Add the first label to the first vertical layout
+        self.v_layout1.addWidget(self.label2) # Add the second label to the first vertical layout
+        self.v_layout2.addWidget(self.label3) # Add the third label to the second vertical layout
+        self.v_layout2.addWidget(self.label4) # Add the fourth label to the second vertical layout
+        self.h_layout.addLayout(self.v_layout1) # Add the first vertical layout to the horizontal layout
+        self.h_layout.addLayout(self.v_layout2) # Add the second vertical layout to the horizontal layout
+        self.setLayout(self.h_layout) # Set the window layout to be the horizontal layout
+
+app = QApplication(sys.argv)
+window = Window()
+window.show()
+app.exec_()
+```
+
+---------------------------------------------------------------------
+
+what if class 'Window' here has to be a child of 'QMainWindow'?
+
+If you want to make the Window class a child of QMainWindow, you need to change the superclass from QWidget to QMainWindow. You also need to create a central widget and set it as the main window's central widget. Here is an example of how to do that:
+
+```python
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QLabel
+
+class Window(QMainWindow): # Change the superclass from QWidget to QMainWindow
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("My App") # Set the window title
+        self.resize(300, 200) # Set the window size
+        self.h_layout = QHBoxLayout() # Create a horizontal layout
+        self.v_layout1 = QVBoxLayout() # Create the first vertical layout
+        self.v_layout2 = QVBoxLayout() # Create the second vertical layout
+        self.label1 = QLabel("Label 1") # Create the first label
+        self.label2 = QLabel("Label 2") # Create the second label
+        self.label3 = QLabel("Label 3") # Create the third label
+        self.label4 = QLabel("Label 4") # Create the fourth label
+        self.v_layout1.addWidget(self.label1) # Add the first label to the first vertical layout
+        self.v_layout1.addWidget(self.label2) # Add the second label to the first vertical layout
+        self.v_layout2.addWidget(self.label3) # Add the third label to the second vertical layout
+        self.v_layout2.addWidget(self.label4) # Add the fourth label to the second vertical layout
+        self.h_layout.addLayout(self.v_layout1) # Add the first vertical layout to the horizontal layout
+        self.h_layout.addLayout(self.v_layout2) # Add the second vertical layout to the horizontal layout
+        self.central_widget = QWidget() # Create a central widget
+        self.central_widget.setLayout(self.h_layout) # Set the central widget's layout to be the horizontal layout
+        self.setCentralWidget(self.central_widget) # Set the main window's central widget to be the central widget
+
+app = QApplication(sys.argv)
+window = Window()
+window.show()
+app.exec_()
+```
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------

@@ -1,0 +1,406 @@
+Django:
++ First step - creating virtual environment:
+in terminal, go to the directory you wish and ->
+python -m venv 'venv_name'
+/scripts/activate.bat
+then in your editor, choose this python interpreter.
+pip install django
++ Now, you're ready to work with Django:
+django-admin startproject 'project_name'
+python manage.py runserver
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py startapp 'app_name'
+(to add your app to your django interpreter, go to the main 
+settings.py and add your app's name in the list for apps.)
+(if you go to your app's folder, you see a apps.py file;
+inside, you'll find a class. it is suggusted that you give
+this class's name to 'installed_apps' in settings.py, rather
+than addressing just the app's name. for instance, to address
+the class in app 'home', we do like:	 'home.apps.HomeConfig')
+(then create a 'urls.py' file in your app directory.)
+(use the same method as in main urls.py to add urls to
+your new app's urls.py.)
+(then import views from your app's directory and pass one of its
+functions to your path in urls.py)
+(the first argument of all view functions must be 'request')
+(from django.http import HttpResponse, and use it with 'return' to
+print simple strings on your page.)
+(add the urls you've configured for your app to the main urls.py
+using the include, like this:)
+
+from django.urls import path, include
+	urlpatterns = [
+		path('admin/', admin.site.urls),
+		path('', include('app_name.urls'))
+	]
+
+(create a directory for templates in your project's main folder,
+where manage.py is saved. then you can create your html files there)
+(add your template folder to your django interpreter like this:
+go to settings.py -> TEMPLATES -> 'DIRS': [BASE_DIR / 'templates'])
+(you would better put html files of every app, in its specified folder
+at app's dir -> templates -> app's name -> your html files.)
+(to show html pages in your view's functions, use the following way
+instead of HttpResponse:) 
+return render(request, 'html page's name')
+(you can pass some data to your html page by using 'context' kwarg.
+in fact, you pass a dict to this kwarg and use only its keys in html
+page. these keys must be used in placeholders within html page. 
+{{}} -> placeholder. e.g.:)
+
+def hello(request):
+	user = {'name': 'jerald', 'age': 29}
+	return render(request, 'Hello.html', context=user)
+
+(tags let you have python syntaxes in html pages. use this form: 
+{% tags %} -> to create tags. some examples:)
+if sentences:
+    {% if age < 18 %}
+    <p>you don't have age qualification </p>
+    {% elif age == 18 %}
+    <p>sensitive content. be cautious</p>
+    {% else %}
+    <h3> hello page. </h3>
+    <h3> you've entered as {{name}}. </h3>
+    <h3> you have {{age}} years old. </h3>
+    {% endif %}
+
+for loops:
+	{% for ...... in ......... %}
+	pass
+	{% endfor %}
+
+(filters are used to modify (filter) your data:)
+    <h3> you've entered as {{name|upper}}. </h3>
+
+(find more tags and filters at docs.djangoproject.com/en/4.1/)
+(we create our models in models.py in every app)
+(our models are in fact some classes that inherit the parent class
+'django.db.models.Model')
+(for naming your models, use only one single (not plural) noun, with
+its first letter capital (camelcase))
+(determine your fields by creating a variable with a specific type;
+see a full list of field types in django documentation. e.g.:)
+
+	from django.db import models
+	# Create your models here.
+	class Person(models.Model):
+	    firstname = models.CharField(max_length=50)
+	    lastname = models.CharField(max_length=100)
+	    description = models.TextField()
+	    date = models.DateField()
+
+(after creating or modifying your model, you save it by using:)
+python manage.py makemigrations
+(then apply the changes to your database by:)
+python manage.py migrate
+(to work with your models in admin panel, we go to admin.py & do as:)
+
+	from django.contrib import admin
+	from .models import Person
+	# Register your models here.
+	admin.site.register(Person)
+
+(then if you head to the admin panel of your site, you'll see your 
+model inside your app's name.)
+(but to have access to your models' data within your code, you ought to 
+use a middleman, as your manager, called 'objects'. see it for yourself:)
+
+in my app's views.py:
+	from django.shortcuts import render
+	from .models import Person
+	def hello(request):
+	    data = Person.objects.all()
+	    return render(request, 'Hello.html', {'persons': data})
+
+in Hello.html:
+	    {% for person in persons %}
+        	<h2>{{person.firstname}} </h2>
+	        <h3>{{person.lastname}} </h3>
+        	<small>{{person.date}} </small>
+	    {% endfor %}
+
+(inheritance in html pages is applied by utilization of two important
+tags: {% block 'block_name' %}	and {% endblock %})
+(with this, you can have all of your common html codes in one html page.
+in this examole, we call this page: base.html)
+
+in base.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+{% block content %} {% endblock %}
+</body>
+</html>
+
+in Hello.html:
+{% extends 'base.html' %}
+{% block content %}
+    {% for person in persons %}
+        <h2>{{person.firstname}} </h2>
+        <h3>{{person.lastname}} </h3>
+        <small>{{person.date}} </small>
+    {% endfor %}
+{% endblock %}
+{% block title %} Hello Page {% endblock %}
+
+(we usually give names to every url for ease in furthur uses.
+to do so, add your intended name after 'name' kwarg while difining
+your url in urls.py)
+(to use this name later, in .py files (especially like views.py) only
+use the name you've given to the url, as a str.)
+(in html pages, however, to use this name, you must use a tag like:)
+{% url 'name' %}
+(add the required arguments of the url after the 'name' str separated
+with space. e.g.:)
+    <a href="{% url 'del' person.id %}" class="btn btn-danger">delete</a>
+(to delete a user, select it by using your manager 'objects' and the
+function '.get(id:......)' and then use the func '.delete()'. e.g.:)
+    Person.objects.get(id=ID).delete()
+you can return 'redirect('url')' instead of render if you only want to
+redirect the client to a page. e.g.:)
+from django.shortcuts import render, redirect
+    return redirect('home')
+(to add flash messages, import 'messages' from django.contrib and then
+use one of these kinds:)
+(debug, info, success, warning, error -> in this way:)
+messages.info(request, 'your message', 'type')
+(use a type like success or warning etc as your extera tag to determine
+your message's type)
+(create form.py in your app's folder and do as following to create forms:)
+
+	from django import forms
+	class PersonCreate(forms.Form):
+	    fName = forms.CharField()
+	    lName = forms.CharField()
+	    dscrptn = forms.CharField()
+	    date = forms.DateField()
+
+(in fact, forms are quite simmilar to models; your form's class's variables
+must be chosen based on the model with which your form is going to be
+synced.)
+(you can send some arguments while defining these variables. one of them
+is 'required=True or False'. another is label='name'.)
+(to show your form, import your form from the forms.py and create an
+instance of this class in your desired function and pass it to a html
+page and use it in that page. e.g.:)
+
+<h3>create a Person:</h3>
+<form action="" method="" novalidated>
+	{% csrf_token %}
+	<h5> {{myForm}}} </h5>
+	<input type="submit" value="create">
+</form>
+
+(you could use one of these insted of simple 'myForm' for specific formation:)
+	myForm.as_table
+	myForm.as_p
+	myForm.as_ul
+
+(to 'action' you assign the url you want the data be submitted to.
+leave it a blank str to point to the the page from which the form
+is started (originated) from.)
+(to 'method' assign either "post" or "get" as submitting type.
+spare this 'method' tag enirely to use deafault option which is 'get'.)
+('novalidate' tag disables BROWSER's validation on what the client enters
+in forms.)
+(the csrf_code tag prevents hacking the website.)
+(here is a syntax you should use to evaluate forms, in views.py:)
+
+def create(request):
+    if request.method == 'POST':
+        instance = PersonCreate(request.POST)
+        if instance.is_valid():
+            cd = instance.cleaned_data
+            Person.objects.create(
+                firstname=cd['fName'],
+                lastname=cd['lName'],
+                description=cd['dscrptn']
+            )
+            messages.success(request, 'Person created successfully.', 'success')
+            return redirect('home')
+    else:
+        instance = PersonCreate()
+    return render(request, 'create.html', {'form': instance})
+
+(p.s.1: PersonCreate is the name of our class in forms.py, and it's like:)
+class PersonCreate(forms.Form):
+    fName = forms.CharField(label='first name')
+    lName = forms.CharField(label='last name')
+    dscrptn = forms.CharField(label='description')
+
+(p.s.2: Person is our model, and it's like:)
+class Person(models.Model):
+    firstname = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=100)
+    description = models.TextField()
+
+
+(another way to create a form is to use 'ModelForm', which creates a form
+based on a model. to do so, import ModelForm from django.forms and create
+a nested class like below:)
+
+from django import forms
+from .models import Person
+class PersonUpdate(forms.ModelForm):
+    class Meta:
+        model = Person
+        fields = ['firstname', 'lastname', 'description']
+        # fields = '__all__'
+
+(p.s.: 'model' is the model you create your form based on.)
+(also, in 'fields' you choose the fields of your model that
+you want to evaluate in your form. use '__all__' dunder to choose 
+them all.)
+(this is the best way to create the 'update' function in views.py:)
+
+def update(request, ID):
+    current_person = Person.objects.get(id=ID)
+    if request.method == 'POST':
+        object = PersonUpdate(request.POST, instance=current_person)
+        if object.is_valid():
+            object.save()
+            messages.success(request, 'Person updated succussfully.', 'success')
+            return redirect('detail', ID)
+    else:
+        object = PersonUpdate(instance=current_person)
+    return render(request, 'update.html', {'form': object})
+
+(we can use pk to access primary key in our database, instead of id. e.g.:	Person.objects.get(pk=ID))
+(to register a user, we should get its info from the client, using a form
+_which we have named 'RegistrationForm' in this example_. then in views.py do as:)
+
+from django.shortcuts import render, redirect
+from .forms import RegistrationForm
+from django.contrib.auth.models import User
+from django.contrib import messages
+# Create your views here.
+def registration(request):
+    if request.method == 'POST':
+        instance = RegistrationForm(request.POST)
+        if instance.is_valid():
+            cd = instance.cleaned_data
+            myUser = User.objects.create_user(cd['username'], cd['email'], cd['password'])
+            myUser.first_name = cd['firstname']
+            myUser.last_name = cd['lastname']
+	    myUser.save()
+            messages.success(request, f'{cd["firstname"]} successfully registered as {cd["username"]}.', 'success')
+            return redirect('home')
+    else:
+        instance = RegistrationForm()
+    return render(request, 'registration.html', {'form': instance})
+
+(to login a user, we use authenticate() and login() methods from django.contrib.auth.)
+(for example:)
+
+def log_in(request):
+    if request.method == 'POST':
+        instance = LoginForm(request.POST)
+        if instance.is_valid():
+            cd = instance.cleaned_data
+            user = authenticate(request, username=cd['username'], password=cd['password'])
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'user logged in successfully.', 'success')
+                return redirect('home')
+            else:
+                messages.success(request, 'username or password is not valid.', 'danger')
+    else:
+        instance = LoginForm()
+    return render(request, 'login.html', {'form': instance})
+
+
+(to log out, you just need to import 'logout' from the same class you imported
+'login', and pass the 'request' to it. see it for yourself:)
+
+	def log_out(request):
+	    logout(request)
+	    messages.success(request, 'user logged out successfully.', 'success')
+	    return redirect('home')
+
+('request' is a very important and useful tool which is available only in
+templates and views. there are tons of important data that are stored in request.
+some of them are request.method, request.POST, request.user, etc.
+as an important note, remember that you can have access to the user (admin) who
+has logged into the site by 'request.user'. in fact, request.user returnes 
+admin's username in html pages. .user.is_authenticated returns a Bolean
+which determines if user has logged in or not. you can access to user's
+other data like this: request.user.first_name
+see a full list of request attributes at https://docs.djangoproject.com/en/4.1/ref/request-response/)
+
+
+
+
+[SEASON-2]
+{class based views}
+in views.py, from django.views import View. then create a class like:
+
+class HomeView(View):
+	form_class = UserForm
+	def get(self, request):
+		my_form = self.form_class()
+		pass
+
+	def post(self, request):
+		pass
+
+then in your urls.py, while calling this class in your path, you must add '.as_view'
+at the end of the class's name. e.g.:
+	path('', views.HomeView.as_view(), name='home')
+in class based views, put repeated data, like forms, in a class variable; that's what 
+'form_class' is in the last example.
+
+
+{widgets}
+widgets are used to add specifications to your form. you can add 'attrs' in ypur widgets as html attributes as well. so in forms.py:
+
+class UserForm(forms.Form)
+	username = forms.CharField()
+	email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'email', 'placeholder':'enter your email'}))
+	password = forms.CharField(widget=forms.PasswordInput)
+
+
+{namespaces}
+if you want to give a namespace to your app's URLs, in main urls.py, inside 'include()' function, 
+give another parameter as namespace. then in your app's urls.py, before 'urlpatterns' list, create a
+variable as: app_name = 'namespace you've given to this app in main urls.py'
+afterwards, to address to a url inside html files, use this tag:	{% url namespace:name %}
+and within .py files, just use 'namespace:name'
+
+
+
+{user}
+in views.py, to register a user:
+
+from django.shortcuts import render, redirect
+from django.views import View
+from .form import UserRegistrationForm
+from django.contrib.auth.models import User
+from django.contrib import messages
+
+class RegisterView(View)
+	form_class = UserRegistrationForm
+	template_name = 'account/register.html'
+
+	def get(self, request):
+		form = self.form_class()
+		return render(request, self.template_name, {'form':form})
+
+	def post(self, request):
+		form = self.form_class(request.POST)
+		if form.is_vaid():
+			cd = form.cleaned_data
+			User.objects.create_user(cd['username'], cd['email'], cd['password'])
+			messages.success(request, 'you registered successfully.', 'success')
+			return redirect('home:home')
+		return render(request, self.template_name, {'form':form})		
+
+
+{form validation (episode 8&9)}
+
+

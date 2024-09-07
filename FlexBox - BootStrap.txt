@@ -1,0 +1,94 @@
+[FlexBox:]
+display: flex;		(apply it on .flex-container class)
+flex-wrap: nowrap/ wrap/ wrap-reverse;		(applied on flex-container)
+flex-direction: row/ row-reverse/ column/ column-reverse;	(applied on flex-container)
+flew-flow: wrap row;		(short hand)			(applied on flex-container)
+justify-content: flex-start/ flex-end/ center/ space-between/ space-around/ space-evenly/ stretch;		(horizontal allignment, applied on flex-container)
+align-items: flex-start/ flex-end/ center/ stretch/ baseline/ space-between/ space-around/ space-evenly;	(vertical allignment, applied on flex-container)
+allign-content: // //;			(content is a group of items, applied on flex-container)
+allign-self: 	// //;			(alligns one item only, applied on flex-items)
+order: .../-1/0/1/...;			(applied on flex-items)
+flex-grow: 0/1/2/...;			(deafult value: 0; when all items have flex-grow:1 -> they will consume 
+					 all the space in flex container (like stretch in allignments))		(applied on flex-items)
+flex-shrink: //;			(opposite of flex-grow)		(applied on flex-items)
+flex-basis: auto/10px/12%/...;		(applied on flex-items)
+flex: {flex-grow} {flex-shrink} {flex-basis};		(short hand) (applied on flex-items)
+
+(starting from video 11, up to video 13, what is discussed is flex-box in BOOTSTRAP. video 14 and the last video (15) are miniprojects.)
+
+
+
+
+[BootStrap:]
+(to make a better look out of our html templates, we use bootstrap.
+copy this link in the 'head' tag of html pages to use this framework:)
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+(now, using bootstrap documentation @ https://getbootstrap.com/docs/5.2/components/navbar/
+we can add many customizations to our html page, by pasting its pre-written
+code in our page. one of them is navbar.)
+(use the following tag to include other html pages that are in your
+page's directory:)
+{% include 'page_name.html' %}
+(put the body of your html page inside <div class="jumbotron"> </div>
+and in head section, define jumbotron style like:)
+ <style>
+        .jumbotron{
+            padding: 80px;
+            margin-button: 20px;
+            margin-top: 100px;
+            background-color: #1ABC9C
+        }
+    </style>
+(this will add background-color and padding etc to customize your page)
+
+spacing in bootsrap 5.2:
+(https://getbootstrap.com/docs/5.2/utilities/spacing/)
+The classes are named using the format {property}{sides}-{size} for xs and {property}{sides}-{breakpoint}-{size} for sm, md, lg, xl, and xxl.
+Where property is one of:
+    m - for classes that set margin
+    p - for classes that set padding
+Where sides is one of:
+    t - for classes that set margin-top or padding-top
+    b - for classes that set margin-bottom or padding-bottom
+    s - (start) for classes that set margin-left or padding-left in LTR, margin-right or padding-right in RTL
+    e - (end) for classes that set margin-right or padding-right in LTR, margin-left or padding-left in RTL
+    x - for classes that set both *-left and *-right
+    y - for classes that set both *-top and *-bottom
+    blank - for classes that set a margin or padding on all 4 sides of the element
+Where size is one of:
+    0 - for classes that eliminate the margin or padding by setting it to 0
+    1 - (by default) for classes that set the margin or padding to $spacer * .25
+    2 - (by default) for classes that set the margin or padding to $spacer * .5
+    3 - (by default) for classes that set the margin or padding to $spacer
+    4 - (by default) for classes that set the margin or padding to $spacer * 1.5
+    5 - (by default) for classes that set the margin or padding to $spacer * 3
+    auto - for classes that set the margin to auto
+Horizontal centering:
+Additionally, Bootstrap also includes an .mx-auto class for horizontally centering fixed-width block level content—that is, content that has display: block and a width set—by setting the horizontal margins to auto.
+<div class="mx-auto" style="width: 200px;">
+  Centered element
+</div>
+
+some important notes:
+bootsrap considers every div to have 12 parts in total.
+to make a responsive web page, we need to determine evey block of our site
+occupies how many parts of its parent div in different modes.
+there are 4 display modes:
+	lg -> large: desktop
+	md -> medium: laptop
+	sm -> small: tablet
+	xs -> extra small: cellphone
+to determine how much should our div occupy in different displays, we use classes like:
+<div class="container">
+  <div id="header" class="row">HEADER</div>
+  <div id="body" class="row">
+    <div id="menu" class="col-xs-12 col-sm-3 col-md-4 col-lg-5">MENU</div>
+    <div id="content" class="col-xs-12 col-sm-9 col-md-8 col-lg-7">CONTENT</div>
+  </div>
+  <div id="footer" class="row">
+    <div id="test" class="col-md-6 offset-md-3"></div>
+  </div>
+</div>
+
+we have classes in this form too: class="visible-xs" or "hidden-md"

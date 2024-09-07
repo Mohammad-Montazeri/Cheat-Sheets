@@ -1,0 +1,378 @@
+HTML stands for: Hypertext Markup Language
+CSS stands for: Cascading Style Sheets
+CDN stands for: Content Delivery Network
+
+This is a &nbsp; regular space.
+This is a &ensp; two spaces gap.
+This is a &emsp; four spaces gap.
+
+Recommended Courses at TopLearn.com:
+html css پیشرفته خسروجردی
+flexbox خسروجردی
+sass اردوخانی
+bootstrap مدائنی
+javascript مدائنی
+jquery اردوخانی
+
+
+COUPLE TAGS:
+<p> paragraph </p>
+<b> bold </b>
+<strong> bold </strong>
+<i> italic </i>
+<em> italic </em>
+<h1> header from one to 6 </h1>
+<header> header part of your page </header>
+<main> main part of your page </main>
+<aside> sidebar part of your page </aside>
+<footer> footer part of your page </footer>
+<ul> unordered list </ul>
+<ol type="" start=""> ordered list </ol>
+<dl> description list </dl>
+<dt> description title </dt>
+<dd> description item </dd>
+<li> list item </li>
+<a href="" target="_blank/_self/etc" title=""> link </a>
+<style> style configurations </style>
+<div> division with block display </div>
+<span> group with inline display </span>
+<form action="" method="" target='_blank' autocomplete="on/off" enctype="" novalidate> form </form>
+<label for=""> input name/label </label>
+<progress max="100" value="50"> progress declaration icon </progress>
+<select multiple> a select box dropdown </select> 
+<option value="" disabled selected> an option of dropdown </option>	 (within the select box)
+<optgroup label="group name"> options' group </optgroup>
+<datalist id=""> a parallel to <select> tag, followed by single <option> tags and works <input> only </datalist>
+<textarea name="" cols="20" rows="8" wrap="hard/soft" resize="none"> a resizable text area </textarea>
+<button type="submit/button/reset"> button </button>
+<table> table </table>
+<caption> table's title </caption>
+<th colspan="3" rowspan="2"> table's header </th>
+<tr> table's row </tr>
+<td> table's data (column) </td>
+<thead> contains table's header section </thead>
+<tbody> contains table's body section </tbody>
+<tfoot> contains table's footer section </tfoot>
+<colgroup> contains table's <col> tags </colgroup>
+<pre> a text tag that shows whatever you write within </pre>
+<map name="map_name"> image map selector </map>		(within, should be <area>)
+<picture> picture </picture>
+<video width="" height="" controls> video </video>
+<i class="icon's class name"> icon </i>
+<button type="submit/button/reset" autofocus disabled form="" name="" value=""> button </button>
+
+
+SINGLE TAGS:
+<input type="" placeholder="" value="">
+(some of the most important input types:
+text, password, email, checkbox, color, date, month, week,
+time, file, hidden, number, range, search, tel, url, ...)
+<input type="radio" value="" name="">name
+<input type="button" value="...">
+<input type="submit" value="...">
+<input type="reset" value="...">
+(checkout these 3 awsume websites to learn about all input
+attributes:)
+https://www.w3schools.com/html/html_form_attributes.asp
+https://www.tutorialspoint.com/html/html_input_tag.htm#
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
+<source srcset="picture address/name, second-picture 2x" media="(min-width: 700px) and (orientation:landscape/portrait)" type="image/webp" sizes="800vw">
+<source src="video address" type="video/mp4 or video/webm" autoplay muted poster="image address" preload="none or metadata or auto">
+<img src='adress/name' alt='alternative info' title="" usemap="#map_name">
+<area shape="" coords="" href="" alt="">	
+(shape could be rect or circle or poly, and coords must be given based on shape.
+a practical area generator: https://www.image-map.net/)
+<link rel="stylesheet" href="adress/name">
+<br> newline (break line)
+<hr> horizontal line
+<meta charset="UTF-8">
+<col span="2" style="">
+<option value="">
+<meta name="viewport" content="witdh=device-width, initial-scale=1.0">
+
+
+SEMANTIC TAGS:
+<header> header section </header>
+<nav> navigation bar </nav>
+<main> main body section </main>
+<article> independent post inside main section </article>
+<aside> side bar </aside>
+<section> sections including bunch of articles </section>
+<footer> footer section </footer>
+<detail> <mark> <summary> <time> ...
+
+
+GLOBAL ATTRIBUTES:
+accesskey=""
+contenteditable="true/false"
+data-attribute=""
+dir="ltr/rtl/auto"
+lang="en-US/fa-IR"	(usually used only once in <html> tag.)
+spellcheck="true/false"
+tabindex="1"	(the number determines priority of objects)
+title="object's title or info"
+dragable="true/false"
+style=""
+class=""
+id=""
+hidden
+
+
+DISPLAY TYPES:
+none -> doesn't display anything, and doesn't occupy any space or block.
+block -> occupies a full size block, and can take width and heith.
+inline -> occupies only a rectangular space inside a line, and can't take
+width, height, margin-top, margin-bottom, padding-top and padding-bottom.
+inline-block -> is just like an inline, except it has customizable width
+and height like a block.
+table/inline-table 
+table-cell/table-colomn/table-header/etc
+list-item, contents, flex, grid
+
+
+CSS COMMON PROPERTIES:
+color: red;
+size: small/medium/24px or % or em or rem or vw or vh or vmin or vmax;
+visibility: hidden
+opacity: a number from zero to 1, deciding an element's (usually a picture's) transparency.
+box-shadow: 0 8px 10px 0 blue;
+!important	(used to declare a style as highest priority. e.g.: color:blue !important)
+
+background-color: blue;
+background-image: url('image name/address');
+background-repeat: no-repeat, repeat-x, repeat-y;
+background-attachment: fixed/scroll/local;
+background-clip: border-box/padding-box/content-box/text;
+background-origin: exactly the same as background-clip;
+background-position: center top/left bottom/100% 50px/etc;
+background-size: auto/cover/contain/40% 60px;
+background-image: linear-gradient(to top right, blue, yellow, ...);
+background-image: radial-gradient(circle, red, blue 20%, ...)
+(an excelent site to create online gradients: https://cssgradient.io)
+
+border-style: choose from a wide varity of styles;
+border-width: thin/medium/thick/2px/2px 3px/1% 2% 3px 4px;
+border-color: give one, two or four colors;
+border-radius: 10px;
+border-collapse: collapse/separate;    (collapses duplicate border lines in tables)
+border-spacing: 40px;	(only works if border-colapse is set on separate)
+border-bottom/border-left/etc: red 2px solid;
+
+margin: auto/give one, two or four numbers like 10px 20px; 
+margin-collapse: collapse;
+padding: everything about margin, works here as well;
+outline: exactly the same as border, but applies between border and margin;
+outline-offset: 5px;	(adds space between border and outline)
+width or height: 50%;
+max-width or max-height: 400px;
+min-width or min-height: 200px;
+direction: rtl/ltr/auto;
+vertical-align: top/middle/bottom;
+
+list-style-type: none/circle/square/etc;	(for <ul> tags)
+list-style-image: url("image address");		(for <ul> tags)
+list-style-position: inside/outside;		(for <ul> tags)
+list-style-type: upper-roman/lower-alpha/etc;	(for <ol> tags)
+
+transition-property: width/padding-top/...;
+transition-duration: 2s;
+transition-timing-function: linear/ease/ease-in/ease-out/ease-in-out;
+transition-delay: 1s;
+transition: width 2s ease-in 1s, font-size 3s, transform 1.5s;		(short-hand)
+
+transform: translate(100px, 200px);
+transform: rotate(-30deg);
+transform: scale(2, 3);
+transform: scaleX(2);
+transform: scaleY(3);
+transform: skew(30deg, 10deg);
+transform: skewX(20deg);
+transform: skewY(39deg);
+transform: matrix(2, -0.5, 0, 1, 0, 0);		(short-hand)
+
+text-align: center/left/right/justify;
+text-transform: uppercase/lowercase/capitalize;
+text-indent: 30px;
+text-shadow: 2px 3px 5px red;	(x y transparency color)
+text-overflow: clip/ellipsis;
+text-decoration: none/underline;
+letter-spacing: 2px;
+word-spacing: 5px;
+line-height: 2;		(no unit required)
+white-space: nowrap;
+
+font-size: 20px;
+font-weight: normal/bold/bolder/400;
+font-style: normal/italic/oblique;
+font-family: Georgia, 'Times New Roman', Times, serif;
+font-family: Arial, Helvetica, sans-serif;
+font-family: "Lucida Console", Courier, monospace;
+(to use external fonts in your page, download the font file
+with .eot, .ttf and .woff formats. then add them to your project
+and include them in your .css file via this syntax:
+@font-face{
+    font-family: "font's name";
+    src: url('eot file's name or address') format('eot')
+    src: url('ttf file's name or address') format('ttf')
+    src: url('woff file's name or address') format('woff')
+    }
+then you'll be able to use font's name in your styles.)
+(Font Awesome or Bootstrap or Google icons are most used shape fonts for websites.
+icons can be used via cdn or by downloading icons' css file and linking it to our
+html doc. cdn needs icon designers web page, thus needs internet; but if you download
+the stylesheet that includes the icons, and link it to your html doc just like any
+other stylesheet, you can access all of its icons without terror of net access or 
+filtering issues.)
+
+table-layout: auto/fixed;
+overflow-x: auto;		(also for overflow-y; mostly works on <div> tags.)
+empty-cells: show/hide;		(for <table> tags)
+caption-side: top/bottom/etc;	(for <table> tags)
+
+cursor: pointer/zoom-in/etc;	(see a full list of cursor types @ https://developer.mozilla.org/en-US/docs/Web/CSS/cursor)
+float: none, right or left;
+clear: left, right or both;
+overflow: hidden, scrol, auto or visible;	(overflow-x or y are available too)
+position: static, relative, fixed, absolute, sticky;
+top: 10px;	(also for left, right and bottom)
+(but remember that the last style works with all position modes except 'static'.
+there is also a slight difference between 'margin-top' and 'top' styles.)
+(with relative position mode, despite static mode, you can determine the 
+block's position related to 4 sides. in absolute mode, you do the same as 
+relative mode, except it gives space to 4 sides in respect to block's parent's
+border, if it has a relative mode; if not, just like relative mode, it gives
+the space in respect to the body section.)
+z-index: -2/-1/0/100/...	
+(z-index takes a number from -infinity to +infinity, and determines priority
+of a showing a tag above or below others while using 'position' style.)
+
+
+CSS STYLES:
+prefered to use: external/internal/inline
+priority: inline/internal/external
+ Inline:
+give css properties inside 'style' attr of the tag you wish.
+ Internal:
+in head section, open up a 'style' tag, select a tag type,
+in braces, configure styles you wish, separated by semicolon. e.g:
+  <style>
+    p{
+    color: #00ff10;
+    font-size: 25px;
+    }
+  </style>
+ External:
+create a .css file to include all css configuratoins. to link this 
+css to our html doc, use the following tag:
+<link rel='stylesheet' href='css file name or address'>
+ Import
+another method to use an external css file in our html docs, is using 
+'@import' syntax INSIDE one css file that is LINKED to our html doc.
+for this method, use one of these syntaxes as your linked stylesheet's
+first line:
+    @import "css file's name or address";
+    @import url("css file's name or address");
+    @import "css file's name or address" screen and (max-width: 500px);
+
+
+MEDIA QUERY:
+@media screen and (min-width: 700px){
+	body{
+	  css styles
+	}
+
+	h1{
+	  css styles
+	}
+}
+or:
+@media screen and (orientation: landscape){.......}
+or:
+@media print {.....}
+
+
+SELECTORS:
++ p{...}			->	selects all <p> tags.
++ p,h1,li{...}			->	we can select more than a tag, by using comma as separator.
++ p.class or .class{...}	->	we can also select a speciific group of tags.
+					to do so, to every specific tag we wish, give a 'class'
+					attribute and choose a name for this class; then, in css
+					file, to select this class, we use the class-name we chose,
+					simply after a dot.
+					(you can assign more than one class to a tag. to do so, separate
+					class names with space. e.g.:<p class="first second alternative"> hi </p>)
++ #id{...}			->	instead of 'class' we can use 'id' attr, then use 'sharp/hashtag' instead
+					of dot to address the id.
+					(another use of id, is that if for example you give an id to your main
+					header, then on any link or buttom that you give that id prefixed with
+					a '#' char, as 'href', it will pass you to that header when clicked.)
++ body{...}			->	to select the whole body section.
++ *{...}			->	to select all tags in your page, just use star.
++ p ~ ul{...}			->	this method selects all <ul> tags that are AFTER a <p> tag.
++ p ul{...}			->	if you delete the '~' char from last method, it will select all <ul> 
+					tags that are WITHIN a <p> tag.
++ p > ul{...}			->	if we use '>' instead of '~', it chooses <ul> tags that are straightly 
+					a CHILD of a <p> tag, and not a child of another middle-cause.	
++ p + ul{...}			->	if use plus sign instead of '~', it selects <ul> tags that have been 
+					defined IMMEDIATELY after a <p> tag; meaning that there is no other
+					tag between them.	
++ a[target]			->	this one selects <a> tags that have a 'target' attribute.
++ input[type=text]{...}		->	this one chooses <input> tags whose 'type' attribute is 'text'.
++ [href='#']			->	selects whatever that's got a 'href' attribute with value: '#'.
++ p[title ~= new]		->	selects <p> tags whose 'title' attr INCLUDES the word 'new'.
++ [class |= top]		->	selects those tags whose class name has 'top' at the begginning.
+					notice that it selects class names in these forms: 'top/top-secret/...'
+					but it does NOT select these types: 'topcontext/top division/...'
++ [class ^= top]		->	this one is quite the same as the last method, only it ALSO selects
+					the formats we mentioned as not selected by last method.
++ [class $= 'test']		->	just the opposite of the last method; meaning it selects every class
+					whose name ENDs with the word 'top'. e.g.: 'first-test/second test/lasttest'
++ [class *= 'te']		->	this one doesn't care if its value is at the begginning or the end of a class's
+					name; wherever it finds a 'te' in a class name, it selects it.
+
+
+semi-elements:
+selector::semi-element{...}
++ p::first-line			->	selects first line of <p> tags. works only for elements with 'block' display.
++ p::first-letter		->	selects first letter of <p> tags. works only for texture elements.
++ p::selection			->	selects part of a <p> tag that has been selected.
++ p::before{content: ...;}	->	adds a content and style right before <p> tags, BUT inside them.
++ p::after{content: ...;}	->	adds a content and style right after <p> tags, BUT inside them.
+
+
+semi-classes:
+selector:semi-class{...}
++ input:checked			->	selects <input> tags with type 'radio' or 'checkbox' that are checked.
++ input:disabled		->	selects <input> tags that are disabled.
++ input:enabled			->	selects <input> tags that are enabled.
++ div:empty			->	selects <div> tags that are empty.
++ tr:hover			->	selects every <tr> tags that you hover your mouse's pointer upon.
++ a:link			->	selects <a> tags that have NOT been clicked on, yet.
++ a:visited			->	selects <a> tags that HAVE been clicked on before.
++ a:active			->	selects <a> tags WHILE beeing clicked on.
++ input:focus			->	selects <input> tags when they are selected to be filled.
+
++ tr:first-child		->	selects <tr> tags that are the first child inside their parent elements.
++ tr:last-child			->	selects <tr> tags that are the last child inside their parent elements.
++ tr:nth-child()		->	if we consider <tr> tags (table rows) as children of a table,
+					this method selects those children who are odd, even, etc.
+					inside paranthessis use a number, a formula, or a type like
+					even, odd.	(1/3n+1/even/odd)
++ tr:nth-last-child()		->	exactly the same as last method, except it starts counting elements
+					from the end, and towards upward.
++ tr:only-child			->	selects <tr> tags that are the only child inside their parent elements.
+
++ p:first-of-type		->	selects first <p> tags inside their parent elements.
++ p:last-of-type		->	selects last <p> tags inside their parent elements.
++ p:nth-of-type()		->	selects specific <p> tags inside their parent elements.
++ p:nth-last-of-type()		->	selects nth <p> tags inside their parent elements, counting from the end.
++ p:only-of-type		->	selects <p> tags that of this type (p), are the only one inside their 
+					parent elements.
+
++ not(p)			->	some times comes with a different syntax, chooses elements that are 
+					NOT <p>. see an example of its utilization:
+					p{...}:not(p){...}
+
+
++ a:hover::after{...}		->	to use both semi-classes and semi elements at the same time, we select
+					the semi-class with a ':' first, and then, the semi-element with '::' .)

@@ -1,0 +1,163 @@
+[Initializations]
+Install GIT from its official website
+Create your directory and project files
+Go to the directory you use as your project's home via Terminal
+>>> git config --global user.name "your name"		(to let the git acknowledge you as the programmer)
+>>> git config --global user.email "your email"
+putting --global in the previous lines, caus	es the git to know only this config (programmer) in this entire system.
+>>> git config --list	(show the config's data recognized by git in this system)
+you can change the config's data later, with the same code as above.
+now, as you're in your directory's address in terminal:
+>>> git init		(initialize the project)
+the project from now on would be known as repository.
+------------------------------------------------------------------------------
+[Committing Changes]
+there are 3 levels of saving in git: untracked -> staged -> committed 
+>>> git status			(get the status of your project)
+>>> git status -s		(get the short status)
+>>> git add file-name(s)	(temporarily save the changes you've made to your file-name(s) that were inside your repository or lately added to it)
+>>> git add .			(temporarily save all files in the project)
+>>> git restore --staged file-name(s)		(restore the file to the previous version)
+>>> git commit -m "message about what you've done in this update"		(permanently save the changes)
+>>> git commit -am "message"	(bypass the first stage commitment and directly commit the changes)
+>>> git log		(show the commitment history; use arrow keys to scroll more commits. use 'Q' to exit this mode)
+>>> git log --oneline	(history summery, --reverse argument can reverse the sort)
+>>> git log --stat	(fully described history)
+>>> git ls-files	(list of files in staging area or index)
+>>> git diff --cached	(see the details of modifications happened in staging area)
+>>> git diff		(see the details of modifications happened in the folders)
+>>> git show uniqueIdentifier		(show the commit)
+>>> git show HEAD~number of versions before the last commit:fileName of filePath	(show the specified commited version of the specified file)
+>>> git ls-tree HEAD~i	(show all the files of a specific commit)
+>>> git restore --staged fileName	(undo an 'add' command to restore a file from the staging area)
+>>> git restore --source=HEAD~i fileName(restores the file to an earlier version)
+>>> git clean		(discard local changes)
+------------------------------------------------------------------------------
+[Branches]
+>>> git branch 		(or >>> git branch --list; shows all branches of the project)
+>>> git branch branch-name		(creates new branch)
+>>> git checkout branch-name		(activates the branch and applies the editing to that from now on)
+after editing, to save your new branch into the main program, you activate the main branch first
+>>> git checkout main
+>>> git merge branch-name
+now we can rename and delete the branch
+>>> git branch -m old-branch-name new-branch-name	(change an old branch's name)
+>>> git branch -d branch-name		(delete branch)
+>>> git checkout commit-hash		(to temporarily  check how was the project in a previous commit)
+now if you edit the files, they won't be saved, unless you save them in a new branch:
+>>> git branch new-branch-name late-commit-hash
+to return to the latest update:
+>>> git checkout main
+------------------------------------------------------------------------------
+[Merging Branches]
+there's a shortcut to create and checkout a branch at the same time:
+>>> git checkout -b branch-name
+also keep in mind that sometimes, when you change one file in two branches, when you want to merge them, it might cause some conflict.
+in that case, the issued file will be altered into a mix of both versions that exist in the two branches. at this point, you can cancel the merge process and reconsider the changes.
+>>> git merge --abort
+or, you can choose one of the versions in the issued file by deleting the other version and saving the file; and then you can commit the changes.
+this conflicts might happen in remote repositories as well. if you change a file both in your local and remote repository and try pushing the result, it might get into the same conflict as above.
+at this point, you must download the remote version of the project and like above, you can decide which version of the file to keep. to do so, you must pull the project from the github like:
+>>> git pull origin main 	(keep in mind that 'origin' is the nickname of the repository and 'main' is the default branch)
+this updates the issued files like above. then you commit the result and then push it.
+this process can be handled by the github too. with the 'compare and pull request' button, you can solve the conflict as well.
+------------------------------------------------------------------------------
+[Undo a Commit, Method #1]
+>>> git revert commit-hash		(deletes a certain commit and its dependencies, usually used to delete the latest commit. keep in mind that this command doesn't DELETE the commit, it only creates a new commit that has reverted (neutralized) THE desired commit's influences.)
+this command might confront CONFLICT error if it's used for middle commits. in that case, to abort the reversion process:
+>>> git revert --abort
+------------------------------------------------------------------------------
+[Undo a Commit, Method #2]
+>>> git reset commit-hash --soft	(deletes only commits and puts their modifications to staged level)
+>>> git reset commit-hash --mixed	(deletes commits and puts their modifications to untracked or modified level)
+>>> git reset commit-hash --hard	(deletes commits and all of their modifications)
+------------------------------------------------------------------------------
+[Ignore]
+If you have some files or directories that you don't want git to see them, do the following steps:
+Create a file in your home directory, and name it .gitignore
+{This is not doable by right click method in windows explorer. You must do that with notebook or editor apps, or CMD.}
+{To create a file using windows command prompt (CMD/Terminal/Powershell), there are couple of methods:}
+
+>>> cd. > filename.suffix	(like: cd. > test.txt)
+>>> dir				(to ensure that the file has been created)
+You can use 'call', 'echo.' or 'break' instead of 'cd.' in the previous script as well.
+You can also use the following code in Window Powershell:
+>>> New-Item filename.suffix
+This creates the file in the current directory, as did the former methods. To specify another location, give the full address while the last portion of the path will be considered as file name.
+To create a folder in cmd, use this code:
+>>> mkdir foldername
+To delete a folder:
+>>> rmdir foldername
+To delete a file or bunch of files:
+>>> del filename1 filename2 ...
+>>> rm filename
+To force delete them:
+>>> del/f filename(s)
+>>> git rm filename(s) or patterns like *.txt or . to delete files both from the folder and from the staging area.
+>>> git rm --cached fileName	(remove files only from the staging area or the index)
+>>> git rm --cached -r dir/	(remove an entire directory from index, using recursive removal by -r)
+>>> mv fileName newFileName	(move or rename a file in folders)
+>>> git mv fileName newFileName (rename or move both in folders and in staging area)
+coments within .gitignore start with #
+https://github.com/github/gitignore contains gitignore templates for various languages.
+
+The .gitignore file might become hidden in your explorer. but you have to open it up and write the name of files or directories you need to be ignored by git.
+For a file, write its full name like: 			myFile.py
+Also, if you want to select all .py files, write: 	*.py
+For directories, put a forward slash '/' at the end of their name, like:	myDir/
+After that you have to commit the modified .gitignore file, as always.
+Use the following website to learn more about using gitignore:
+	https://git-scm.com/docs/qitignore
+The following site also generates .gitignore files that are used in different project technologies. To use it, write, for instance, Django, Laravel, etc in its search box.
+then by generating a piece of code that you must copy into your .gitignore file, you can ignore the unnecessary files and folders of your Django, Laravel, etc project.
+	https://www.toptal.com/developers/gitignorez
+------------------------------------------------------------------------------
+[Github Initializations]
+Open up https://github.com
+Sign in and create a remote repository
+Get your systems SSH key and pase it into your github profile.
+Now, to send your local repository into your github, open your repository in Terminal and after committing all of its updates, use:
+>>> git push remote_repository_address branchName
+the branch name is usually main
+the remote_repository_address is the https or ssh address you get from your github repository
+to delete a repository in github, go to the settings, last option, delete this repository
+in order to have a shortcut of a repository's ssh or https key, we give it a nickname and from then on, we use this name instead of the hustle of the key itself.
+to do so, while you want to introduce your local repository to the github, use this format:
+>>> git remote add name key 
+the key must come from github and the name is usually 'origin'
+later, to see the name of our repository, write:
+>>> git remote -v
+now to push your updates to the repository:
+>>> git push name branch		(like: git push origin main)
+to push other branches of your project, use their name in the previous method:
+>>> git push name another-branch
+------------------------------------------------------------------------------
+[Remote Repository Considerations]
+we should put a README.md file, including the descriptions about our project, in the main branch.
+(There's also a Markdown.md file along with this tutorial that fully explains the means of using markdown language for utilization in README files.)
+we can give stars to the projects we like in Github.
+we can open or continue or close issues, which are messages below every project talking about it.
+we can work on others' projects by cloning their project into our own account by forking it.
+to download a forked project, on the main page, we copy its https or ssh key (in the CODE button right-side-above the project) and use it like:
+>>> git clone address
+then ALWAYS create a new branch and update the project in this branch.
+then, after committing and pushing the changes, we can request the author of the project to merge the results. 
+this is done by the 'compare and pull request' button that appears in the github.
+------------------------------------------------------------------------------
+[Stash]
+imagine you're working on a special feature of your project; you suddenly remember that you have to change other parts of your project, before committing the current feature.
+what you do is, you save your undone feature in some stash space and go handle your necessary jobs. to stash what you've been working on lately, write:
+>>> git stash 
+this saves the feature with a specific id and name in the stash space, while brings back the last committed version of your project so you can work on it.
+if you want to specify the name/message by yourself, use:
+>>> git stash save "message"
+>>> git stash list		(see the stashed versions of your project)
+>>> git stash apply id	(to return to the a stashed version of your project, use its id that you've read via the previous line of code)
+>>> git stash clear		(you can simultaneously have multiple stashed versions. this code clears them all)
+------------------------------------------------------------------------------
+[YouTube]
+>>> git --version
+Use double quotation to specify names including spaces.  
+>>> git config --global -e	(open git's settings file, called .gitconfig, in the default editir program)
+>>> git config -help 		(full help on any command like config, scroll by space bar and exit by 'q')
+>>> git config -h		(minimal help)
